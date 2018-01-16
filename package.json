@@ -1,0 +1,44 @@
+{
+  "name": "cmc-bus",
+  "version": "1.0.0",
+  "description": "Bus info screen (demo)",
+  "main": "index.js",
+  "scripts": {
+    "start": "./node_modules/.bin/webpack-dev-server --open"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lulondon/cmc-bus.git"
+  },
+  "author": "",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/lulondon/cmc-bus/issues"
+  },
+  "homepage": "https://github.com/lulondon/cmc-bus#readme",
+  "devDependencies": {
+    "axios": "^0.17.1",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-node": "^5.1.1",
+    "babel-preset-react": "^6.24.1",
+    "css-loader": "^0.28.8",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "file-loader": "^1.1.6",
+    "html-webpack-plugin": "^2.30.1",
+    "lodash": "^4.17.4",
+    "material-ui": "^0.20.0",
+    "webpack": "^3.10.0",
+    "webpack-dev-server": "^2.10.1"
+  },
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-tap-event-plugin": "^3.0.2",
+    "typeface-roboto": "^0.0.48",
+    "url-loader": "^0.6.2"
+  }
+}

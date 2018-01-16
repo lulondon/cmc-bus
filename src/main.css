@@ -1,0 +1,14 @@
+@font-face{
+    font-family:'DIN Round Web';
+    src:url('./fonts/DINRoundWeb.eot');
+    src:url('./fonts/DINRoundWeb.eot?#iefix') format("embedded-opentype"),url('./fonts/DINRoundWeb.ttf') format("truetype")
+}
+@font-face{
+    font-family:'DIN Round Web Medium';
+    src:url('./fonts/DINRoundWeb-Medium.eot');
+    src:url('./fonts/DINRoundWeb-Medium.eot?#iefix') format("embedded-opentype"),url('./fonts/DINRoundWeb-Medium.ttf') format("truetype")
+}
+
+html, body {
+  font-family: "DIN Round Web" !important
+}
