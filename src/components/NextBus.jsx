@@ -71,8 +71,15 @@ export default class NextBus extends Component {
 
     return (
       this.state.loading
-      ? <p>Loading...</p>
-      : <div className='list-group'>{buses}</div>
+      ? <div className='spinner'><div className="bounce1"></div><div className="bounce2"></div><div className="bounce3"></div></div>
+      : <div className='list-group'>
+          <div className='list-group-item bus-info-header'>
+            <p className='p-2 lead m-0'>{this.state.busData[1][1]}</p>
+            <p className='px-2 py-0 m-0 text-muted'>Next buses to depart from this stop.</p>
+          </div>
+          {buses}
+          <div className='list-group-item bus-attribution-footer px-4'>Powered by TfL Open Data</div>
+        </div>
     );
   }
 }

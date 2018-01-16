@@ -1,8 +1,7 @@
 /* eslint-disable max-len */
 import React, { Component } from 'react'
-import { ListItem } from 'material-ui/List'
 
-const style = { }
+const routeNumberStyle = { fontWeight: 'bold' }
 
 export default class NextBusInfo extends Component {
   render() {
@@ -11,9 +10,9 @@ export default class NextBusInfo extends Component {
     } else {
       return (
         <div className='list-group-item d-flex'>
-          <p className='p-2 m-0' style={style}>{this.props.bus[2]}&nbsp;</p>
-          <p className='p-2 m-0' style={style}>{this.props.bus[3]}</p>
-          <p className='ml-auto p-2 m-0' style={style}>
+          <p className='bus-info-col p-2 m-0 lead' style={routeNumberStyle}>{this.props.bus[2]}</p>
+          <p className='bus-info-col p-2 m-0 lead'>{this.props.bus[3]}</p>
+          <p className='bus-info-col ml-auto p-2 m-0'>
             {Math.round(((Math.abs(new Date(this.props.bus[4] - Date.now())) % 86400000) % 3600000) / 60000)}&nbsp;mins
           </p>
         </div>

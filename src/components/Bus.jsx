@@ -3,8 +3,9 @@ import React, { Component } from 'react'
 import NextBus from './NextBus'
 
 const defaultStops = [
-  <option value={91432} key={0}>HereEast (towards London)</option>,
-  <option value={91431} key={1}>HereEast (towards Stratford)</option>
+  <option value='' key={0}>&nbsp;</option>,
+  <option value={91431} key={1}>HereEast (towards Stratford)</option>,
+  <option value={91432} key={2}>HereEast (towards London)</option>
 ]
 
 export default class Bus extends Component {
@@ -62,7 +63,7 @@ export default class Bus extends Component {
                   <div className='form-row'>
                     <div className='form-group col-lg col-xs-12'>
                       <label htmlFor='nearbyStops'>Bus stops near campus</label>
-                      <select className='form-control' id='nearbyStops' onChange={this.handleSelectStop}>
+                      <select className='form-control' id='nearbyStops' defaultValue={91431} onChange={this.handleSelectStop}>
                         {defaultStops}
                       </select>
                     </div>
@@ -80,7 +81,7 @@ export default class Bus extends Component {
           <div className='col-xs-12 col-lg-6 offset-lg-3'>
             {
               this.state.textFieldError
-              ? <div className='alert alert-danger'>{this.state.textFieldError}</div>
+              ? <div className='alert alert-warning'><strong>Warning&nbsp;</strong>{this.state.textFieldError}</div>
               : null
             }
           </div>
