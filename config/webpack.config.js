@@ -1,22 +1,17 @@
 const htmlWebpackPlugin = require('html-webpack-plugin')
 const extractTextPlugin = require('extract-text-webpack-plugin')
 
+const paths = require('./paths')
+
 module.exports = {
-  entry: __dirname + '/src/index.js',
+  entry: paths.src + '/index.js',
   output: {
-    path: __dirname + '/dist',
+    path: paths.build,
     filename: 'bundle.js'
-  },
-  devtool: 'source-map',
-  devServer: {
-    host: '0.0.0.0',
-    port: 3000,
-    inline: true,
-    publicPath: '/'
   },
   plugins: [
     new htmlWebpackPlugin({
-      template: __dirname + '/src/index.html'
+      template: paths.src + '/index.html'
     }),
     new extractTextPlugin('bundle.css')
   ],

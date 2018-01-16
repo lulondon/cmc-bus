@@ -19,8 +19,5 @@ const muiTheme = getMuiTheme({
 
 
 render(
-  <MuiThemeProvider muiTheme={muiTheme}>
-    <Bus />
-  </MuiThemeProvider>,
-  document.getElementById('root')
+  <Bus />, document.getElementById('root')
 )

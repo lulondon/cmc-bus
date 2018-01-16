@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import _ from 'lodash';
-import Paper from 'material-ui/Paper';
-import { List, ListItem } from 'material-ui';
-import Spinner from './Spinner';
 import NextBusInfo from './NextBusInfo';
 
 const errorText = 'Unable to load bus information. Did you enter the code correctly?';
@@ -37,12 +34,6 @@ export default class NextBus extends Component {
         if (this.state.busData[0]) {
           this.setState({ adHocTitle: this.state.busData[1][1] });
         }
-
-        const temp = [];
-        _.sortBy(this.state.busData, i => i[4]).map((bus, i) =>
-          temp.push(<NextBusInfo bus={bus} key={i} />)
-        );
-        this.setState({ buses: temp });
       });
     })
     .catch(() => {
@@ -72,21 +63,16 @@ export default class NextBus extends Component {
   }
 
   render() {
+
+    const buses = [];
+    _.sortBy(this.state.busData, i => i[4]).map((bus, i) =>
+      buses.push(<NextBusInfo bus={bus} key={i} />)
+    );
+
     return (
-      <Paper className='hoc'>
-        <List style={{ padding: 0 }}>
-          <ListItem
-            primaryText={this.state.title || this.state.adHocTitle || 'Buses'}
-            secondaryText={this.state.subtitle || 'Next buses calling at this stop'}
-            disabled={true}
-          />
-          {
-            this.state.loading ?
-            <Spinner error={this.state.error} errorText={errorText} /> :
-            this.state.buses
-          }
-        </List>
-      </Paper>
+      this.state.loading
+      ? <p>Loading...</p>
+      : <div className='list-group'>{buses}</div>
     );
   }
 }

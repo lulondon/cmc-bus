@@ -1,14 +1,10 @@
 import React, { Component } from 'react'
-import { Card, CardHeader, CardText } from 'material-ui/Card'
-import SelectField from 'material-ui/SelectField'
-import TextField from 'material-ui/TextField'
-import MenuItem from 'material-ui/MenuItem'
 
 import NextBus from './NextBus'
 
 const defaultStops = [
-  { label: 'HereEast (towards London)', code: 91432 },
-  { label: 'HereEast (towards Stratford)', code: 91431 }
+  <option value={91432} key={0}>HereEast (towards London)</option>,
+  <option value={91431} key={1}>HereEast (towards Stratford)</option>
 ]
 
 export default class Bus extends Component {
@@ -16,24 +12,19 @@ export default class Bus extends Component {
     super()
     const temp = []
 
-    defaultStops.map((stop, i) => {
-      temp.push(<MenuItem key={i} value={stop.code} primaryText={stop.label} />)
-      return null
-    })
-
     this.state = {
-      TextFieldError: null,
-      nearbyStops: temp
+      stopCode: 91431,
+      textFieldError: null
     }
 
     this.handleSelectStop = this.handleSelectStop.bind(this)
     this.handleCodeEntry = this.handleCodeEntry.bind(this)
   }
 
-  handleSelectStop(event, index, value) {
+  handleSelectStop(event) {
     this.setState({
-      TextFieldError: null,
-      stopCode: value
+      textFieldError: null,
+      stopCode: event.target.value
     })
   }
 
@@ -43,12 +34,16 @@ export default class Bus extends Component {
     if (!stopCode) {
       this.setState({
         stopCode: null,
-        TextFieldError: null
+        textFieldError: ''
       })
     } else if (validationPattern.test(stopCode)) {
       this.setState({
         stopCode,
-        TextFieldError: null
+        textFieldError: null
+      })
+    } else {
+      this.setState({
+        textFieldError: 'Invalid code'
       })
     }
   }
@@ -57,30 +52,41 @@ export default class Bus extends Component {
     return (
       <div className='container-fluid'>
         <div className='row'>
-          <div className='col-lg-4 offset-lg-1 col-md-5'>
-            <Card style={{ marginBottom: '2rem' }}>
-              <CardHeader
-                title='Next buses'
-                subtitle='Select from nearby stops, or enter the 5-digit code for a London bus stop to see the next buses to call there.'
-              />
-              <CardText>
-                <SelectField
-                  children={this.state.nearbyStops}
-                  onChange={this.handleSelectStop}
-                  floatingLabelText='Bus stops near campus'
-                  fullWidth={true}
-                  value={this.state.stopCode}
-                />
-                <TextField
-                  floatingLabelText="Bus stop code"
-                  errorText={this.state.TextFieldError}
-                  onChange={this.handleCodeEntry}
-                  fullWidth={true}
-                />
-              </CardText>
-            </Card>
+          <div className='col-xs-12 col-lg-6 offset-lg-3'>
+            <div className='jumbotron jumbotron-fluid'>
+              <div className='container'>
+                <h1 className='display-4'>London Bus Information</h1>
+                <p className='lead'>Select from nearby stops, or enter the 5-digit code for a London bus stop to see the next buses to call there.</p>
+                <p className='text-muted'>We are unable to provide times for the HereEast shuttle bus service.</p>
+                <form>
+                  <div className='form-row'>
+                    <div className='form-group col-lg col-xs-12'>
+                      <label htmlFor='nearbyStops'>Bus stops near campus</label>
+                      <select className='form-control' id='nearbyStops' onChange={this.handleSelectStop}>
+                        {defaultStops}
+                      </select>
+                    </div>
+                    <div className='form-group col-lg col-xs-12'>
+                      <label htmlFor='stopCode'>5-digit bus stop code</label>
+                      <input className='form-control' type='text' id='stopCode' placeholder={`ex. ${this.state.stopCode || 91432}`} onChange={this.handleCodeEntry}></input>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
           </div>
-          <div className='col-md-7 col-lg-6'>
+        </div>
+        <div className='row'>
+          <div className='col-xs-12 col-lg-6 offset-lg-3'>
+            {
+              this.state.textFieldError
+              ? <div className='alert alert-danger'>{this.state.textFieldError}</div>
+              : null
+            }
+          </div>
+        </div> 
+        <div className='row'>
+          <div className='col-xs-12 col-lg-6 offset-lg-3'>
             { this.state.stopCode ? <NextBus stopCode={this.state.stopCode} /> : null }
           </div>
         </div>
