@@ -4,10 +4,11 @@
   "description": "Bus info screen (demo)",
   "main": "index.js",
   "scripts": {
-    "start": "./node_modules/.bin/webpack-dev-server --open --config config/webpack.dev.config.js",
     "build": "./node_modules/.bin/webpack --config config/webpack.prod.config.js",
-    "test": "yarn lint",
-    "lint": "./node_modules/.bin/eslint --ext '.js','.jsx' src/"
+    "lint": "./node_modules/.bin/eslint --ext '.js','.jsx' src/",
+    "precommit": "yarn test",
+    "start": "./node_modules/.bin/webpack-dev-server --open --config config/webpack.dev.config.js",
+    "test": "yarn lint"
   },
   "repository": {
     "type": "git",
@@ -38,6 +39,7 @@
     "extract-text-webpack-plugin": "^3.0.2",
     "file-loader": "^1.1.6",
     "html-webpack-plugin": "^2.30.1",
+    "husky": "^0.14.3",
     "purify-css": "^1.2.5",
     "purifycss-webpack": "^0.7.0",
     "uglifyjs-webpack-plugin": "^1.1.6",
