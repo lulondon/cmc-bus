@@ -11,7 +11,6 @@ const defaultStops = [
 export default class Bus extends Component {
   constructor() {
     super()
-    const temp = []
 
     this.state = {
       stopCode: 91431,

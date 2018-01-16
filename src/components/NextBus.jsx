@@ -1,21 +1,17 @@
-import React, { Component } from 'react';
-import axios from 'axios';
-import _ from 'lodash';
-import NextBusInfo from './NextBusInfo';
-
-const errorText = 'Unable to load bus information. Did you enter the code correctly?';
+import React, { Component } from 'react'
+import axios from 'axios'
+import _ from 'lodash'
+import NextBusInfo from './NextBusInfo'
 
 export default class NextBus extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       busData: [],
       error: false,
       loading: true,
-      title: this.props.title,
-      subtitle: this.props.subtitle,
       stopCode: this.props.stopCode
-    };
+    }
   }
 
   loadData() {
@@ -32,24 +28,24 @@ export default class NextBus extends Component {
         loading: false
       }, () => {
         if (this.state.busData[0]) {
-          this.setState({ adHocTitle: this.state.busData[1][1] });
+          this.setState({ adHocTitle: this.state.busData[1][1] })
         }
-      });
+      })
     })
     .catch(() => {
-      this.setState({ error: true, loading: true });
-    });
+      this.setState({ error: true, loading: true })
+    })
   }
 
   componentDidMount() {
-    this.loadData();
+    this.loadData()
     this.timer = setInterval(() => {
-      this.loadData();
-    }, 40000);
+      this.loadData()
+    }, 40000)
   }
 
   componentWillUnmount() {
-    clearInterval(this.timer);
+    clearInterval(this.timer)
   }
 
   componentWillReceiveProps(nextProps) {
@@ -58,16 +54,16 @@ export default class NextBus extends Component {
       subtitle: nextProps.subtitle || this.state.subtitle,
       stopCode: nextProps.stopCode || this.state.stopCode
     }, () => {
-      this.loadData();
-    });
+      this.loadData()
+    })
   }
 
   render() {
 
-    const buses = [];
+    const buses = []
     _.sortBy(this.state.busData, i => i[4]).map((bus, i) =>
       buses.push(<NextBusInfo bus={bus} key={i} />)
-    );
+    )
 
     return (
       this.state.loading
@@ -80,6 +76,6 @@ export default class NextBus extends Component {
           {buses}
           <div className='list-group-item bus-attribution-footer px-4'>Powered by TfL Open Data</div>
         </div>
-    );
+    )
   }
 }
