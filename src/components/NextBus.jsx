@@ -15,26 +15,26 @@ export default class NextBus extends Component {
   }
 
   loadData() {
-    let component = this; // eslint-disable-line prefer-const
+    let component = this // eslint-disable-line prefer-const
     axios.get('http://countdown.api.tfl.gov.uk/interfaces/ura/instant_V1', {
       params: {
         StopCode1: this.state.stopCode,
         ReturnList: 'EstimatedTime,LineID,DestinationName,StopPointName'
       }
     })
-    .then((response) => {
-      component.setState({
-        busData: JSON.parse(`[${response.data.replace(/]/g, '],').replace(/\],$/, ']').toString()}]`),
-        loading: false
-      }, () => {
-        if (this.state.busData[0]) {
-          this.setState({ adHocTitle: this.state.busData[1][1] })
-        }
+      .then((response) => {
+        component.setState({
+          busData: JSON.parse(`[${response.data.replace(/]/g, '],').replace(/\],$/, ']').toString()}]`),
+          loading: false
+        }, () => {
+          if (this.state.busData[0]) {
+            this.setState({ adHocTitle: this.state.busData[1][1] })
+          }
+        })
       })
-    })
-    .catch(() => {
-      this.setState({ error: true, loading: true })
-    })
+      .catch(() => {
+        this.setState({ error: true, loading: true })
+      })
   }
 
   componentDidMount() {
@@ -59,23 +59,21 @@ export default class NextBus extends Component {
   }
 
   render() {
-
     const buses = []
     _.sortBy(this.state.busData, i => i[4]).map((bus, i) =>
-      buses.push(<NextBusInfo bus={bus} key={i} />)
-    )
+      buses.push(<NextBusInfo bus={bus} key={i} />))
 
     return (
       this.state.loading
-      ? <div className='spinner'><div className="bounce1"></div><div className="bounce2"></div><div className="bounce3"></div></div>
-      : <div className='list-group'>
-          <div className='list-group-item bus-info-header'>
-            <p className='p-2 lead m-0'>{this.state.busData[1][1]}</p>
-            <p className='px-2 py-0 m-0 text-muted'>Next buses to depart from this stop.</p>
+        ? <div className='spinner'><div className="bounce1"></div><div className="bounce2"></div><div className="bounce3"></div></div>
+        : <div className='list-group'>
+            <div className='list-group-item bus-info-header'>
+              <p className='p-2 lead m-0'>{this.state.busData[1][1]}</p>
+              <p className='px-2 py-0 m-0 text-muted'>Next buses to depart from this stop.</p>
+            </div>
+            {buses}
+            <div className='list-group-item bus-attribution-footer px-4'>Powered by TfL Open Data</div>
           </div>
-          {buses}
-          <div className='list-group-item bus-attribution-footer px-4'>Powered by TfL Open Data</div>
-        </div>
     )
   }
 }

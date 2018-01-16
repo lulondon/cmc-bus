@@ -7,6 +7,4 @@ import './main.css'
 
 import Bus from './components/Bus'
 
-render(
-  <Bus />, document.getElementById('root')
-)
+render(<Bus />, document.getElementById('root'))

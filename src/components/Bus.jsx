@@ -84,7 +84,7 @@ export default class Bus extends Component {
               : null
             }
           </div>
-        </div> 
+        </div>
         <div className='row'>
           <div className='col-xs-12 col-lg-6 offset-lg-3'>
             { this.state.stopCode ? <NextBus stopCode={this.state.stopCode} /> : null }
