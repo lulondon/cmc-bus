@@ -56,8 +56,10 @@ export default class Bus extends Component {
             <div className='jumbotron jumbotron-fluid'>
               <div className='container'>
                 <h1 className='display-4'>London Bus Information</h1>
-                <p className='lead'>Select from nearby stops, or enter the 5-digit code for a London bus stop to see the next buses to call there.</p>
-                <p className='text-muted'>We are unable to provide times for the HereEast shuttle bus service.</p>
+                <h3>Live departure boards for London bus stops.</h3>
+                <p>Select from nearby stops, or enter the 5-digit code for a London bus stop to
+                 view the next departures.</p>
+                <p className='text-secondary'>We are unable to provide times for the HereEast shuttle bus service.</p>
                 <form>
                   <div className='form-row'>
                     <div className='form-group col-lg col-xs-12'>

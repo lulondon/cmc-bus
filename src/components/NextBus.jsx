@@ -26,10 +26,6 @@ export default class NextBus extends Component {
         component.setState({
           busData: JSON.parse(`[${response.data.replace(/]/g, '],').replace(/\],$/, ']').toString()}]`),
           loading: false
-        }, () => {
-          if (this.state.busData[0]) {
-            this.setState({ adHocTitle: this.state.busData[1][1] })
-          }
         })
       })
       .catch(() => {
@@ -67,9 +63,9 @@ export default class NextBus extends Component {
       this.state.loading
         ? <div className='spinner'><div className="bounce1"></div><div className="bounce2"></div><div className="bounce3"></div></div>
         : <div className='list-group'>
-            <div className='list-group-item bus-info-header'>
-              <p className='p-2 lead m-0'>{this.state.busData[1][1]}</p>
-              <p className='px-2 py-0 m-0 text-muted'>Next buses to depart from this stop.</p>
+            <div className='list-group-item m-0 p-4 pb-0 bus-info-header'>
+              <h3>{this.state.busData[1][1]}</h3>
+              <p className='bus-header-subtitle mb-0'>Next buses to depart from this stop.</p>
             </div>
             {buses}
             <div className='list-group-item bus-attribution-footer px-4'>Powered by TfL Open Data</div>

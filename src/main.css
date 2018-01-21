@@ -17,16 +17,6 @@ body {
   padding: 1rem 0;
 }
 
-@media (max-width: 991px) {
-  body {
-    background-color: #B70062;
-  }
-
-  .spinner > div {
-    background-color: #FFF;
-  }
-}
-
 html {
   font-size: 1rem;
 }
@@ -34,7 +24,12 @@ html {
 /* Custom data styles */
 
 .bus-info-header {
-  background-color: #F1F1F1;
+  background-color: #B70062;
+  color: white;
+}
+
+.bus-header-subtitle {
+  font-size: 0.9rem;
 }
 
 .bus-info-col {
@@ -44,6 +39,10 @@ html {
 
 .bus-attribution-footer {
   font-size: 0.8rem;
+}
+
+.jumbotron {
+  border-radius: 0.25rem;
 }
 
 /* Spinner */
@@ -89,5 +88,15 @@ html {
   } 40% { 
     -webkit-transform: scale(1.0);
     transform: scale(1.0);
+  }
+}
+
+@media (max-width: 991px) {
+  body {
+    background-color: rgb(54, 17, 99);
+  }
+
+  .spinner > div {
+    background-color: #FFF;
   }
 }
