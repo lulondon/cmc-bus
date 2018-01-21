@@ -25,6 +25,7 @@ export default class NextBus extends Component {
     })
       .then((response) => {
         this.props.handleClearErrors()
+
         this.setState({
           busData: JSON.parse(`[${response.data.replace(/]/g, '],').replace(/\],$/, ']').toString()}]`),
           loading: false
