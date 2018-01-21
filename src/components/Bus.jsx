@@ -14,11 +14,14 @@ export default class Bus extends Component {
 
     this.state = {
       stopCode: 91431,
-      textFieldError: null
+      textFieldError: null,
+      errors: []
     }
 
     this.handleSelectStop = this.handleSelectStop.bind(this)
     this.handleCodeEntry = this.handleCodeEntry.bind(this)
+    this.handleAddError = this.handleAddError.bind(this)
+    this.handleClearErrors = this.handleClearErrors.bind(this)
   }
 
   handleSelectStop(event) {
@@ -29,23 +32,34 @@ export default class Bus extends Component {
   }
 
   handleCodeEntry(event) {
-    const stopCode = event.target.value
     const validationPattern = new RegExp('^[0-9]{5}$')
-    if (!stopCode) {
+    if (validationPattern.test(event.target.value)) {
       this.setState({
-        stopCode: null,
-        textFieldError: ''
-      })
-    } else if (validationPattern.test(stopCode)) {
-      this.setState({
-        stopCode,
-        textFieldError: null
+        stopCode: event.target.value,
+        textFieldError: null,
+        errors: []
       })
     } else {
       this.setState({
         textFieldError: 'Invalid code'
       })
     }
+  }
+
+  handleAddError(error) {
+    const knownErrors = {
+      416: 'Bus stop code not recognised.'
+    }
+
+    const errorString = error.response
+      ? knownErrors[error.response.status]
+      : String(error)
+
+    this.setState({ errors: this.state.errors.concat(errorString) })
+  }
+
+  handleClearErrors() {
+    this.setState({ errors: [] })
   }
 
   render() {
@@ -88,9 +102,23 @@ export default class Bus extends Component {
           </div>
         </div>
         <div className='row'>
-          <div className='col-xs-12 col-lg-6 offset-lg-3'>
-            { this.state.stopCode ? <NextBus stopCode={this.state.stopCode} /> : null }
-          </div>
+          {
+            this.state.errors.length > 0
+            ? <div className='col-xs-12 col-lg-6 offset-lg-3'>
+                {this.state.errors.map((error, i) => <p className='alert alert-danger' key={i}>{error}</p>)}
+              </div>
+            : <div className='col-xs-12 col-lg-6 offset-lg-3'>
+                {
+                  this.state.stopCode
+                    ? <NextBus
+                        stopCode={this.state.stopCode}
+                        handleAddError={this.handleAddError}
+                        handleClearErrors={this.handleClearErrors}
+                      />
+                    : null
+                }
+              </div>
+          }
         </div>
       </div>
     )

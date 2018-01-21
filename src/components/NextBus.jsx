@@ -12,10 +12,11 @@ export default class NextBus extends Component {
       loading: true,
       stopCode: this.props.stopCode
     }
+
+    this.loadData = this.loadData.bind(this)
   }
 
   loadData() {
-    let component = this // eslint-disable-line prefer-const
     axios.get('http://countdown.api.tfl.gov.uk/interfaces/ura/instant_V1', {
       params: {
         StopCode1: this.state.stopCode,
@@ -23,13 +24,14 @@ export default class NextBus extends Component {
       }
     })
       .then((response) => {
-        component.setState({
+        this.props.handleClearErrors()
+        this.setState({
           busData: JSON.parse(`[${response.data.replace(/]/g, '],').replace(/\],$/, ']').toString()}]`),
           loading: false
         })
       })
-      .catch(() => {
-        this.setState({ error: true, loading: true })
+      .catch((err) => {
+        this.props.handleAddError(err)
       })
   }
 
@@ -37,7 +39,7 @@ export default class NextBus extends Component {
     this.loadData()
     this.timer = setInterval(() => {
       this.loadData()
-    }, 40000)
+    }, 10000)
   }
 
   componentWillUnmount() {
@@ -45,13 +47,13 @@ export default class NextBus extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({
-      title: nextProps.title || this.state.title,
-      subtitle: nextProps.subtitle || this.state.subtitle,
-      stopCode: nextProps.stopCode || this.state.stopCode
-    }, () => {
-      this.loadData()
-    })
+    if (this.state.stopCode !== nextProps.stopCode) {
+      this.setState({
+        stopCode: nextProps.stopCode
+      }, () => {
+        this.loadData()
+      })
+    }
   }
 
   render() {
