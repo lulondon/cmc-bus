@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import NextBus from './NextBus'
 
 const defaultStops = [
-  <option value='' key={0}>&nbsp;</option>,
+  <option value={null} key={0}>&nbsp;</option>,
   <option value={91431} key={1}>HereEast (towards Stratford)</option>,
   <option value={91432} key={2}>HereEast (towards London)</option>
 ]
@@ -25,13 +25,18 @@ export default class Bus extends Component {
   }
 
   handleSelectStop(event) {
+    document.getElementById('stopCode').value = null
+
     this.setState({
       textFieldError: null,
+      errors: [],
       stopCode: event.target.value
     })
   }
 
   handleCodeEntry(event) {
+    document.getElementById('nearbyStops').value = null
+
     const validationPattern = new RegExp('^[0-9]{5}$')
     if (validationPattern.test(event.target.value)) {
       this.setState({
