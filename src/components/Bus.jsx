@@ -4,8 +4,8 @@ import NextBus from './NextBus'
 
 const defaultStops = [
   <option value={null} key={0}>&nbsp;</option>,
-  <option value={91431} key={1}>HereEast (towards Stratford)</option>,
-  <option value={91432} key={2}>HereEast (towards London)</option>
+  <option value={91431} key={91431}>HereEast (towards Stratford)</option>,
+  <option value={91432} key={91432}>HereEast (towards London)</option>
 ]
 
 export default class Bus extends Component {
