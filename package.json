@@ -4,7 +4,7 @@
   "description": "Bus info screen (demo)",
   "main": "index.js",
   "scripts": {
-    "build": "./node_modules/.bin/webpack --config config/webpack.prod.config.js",
+    "build": "NODE_ENV=production ./node_modules/.bin/webpack --config config/webpack.prod.config.js",
     "lint": "./node_modules/.bin/eslint --ext '.js','.jsx' src/",
     "precommit": "yarn test",
     "start": "./node_modules/.bin/webpack-dev-server --open --config config/webpack.dev.config.js",
