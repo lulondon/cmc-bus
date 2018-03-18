@@ -1,3 +1,9 @@
 {
-  "countdownApiProxy": "https://countdown.proxy:9002"
+  "countdownApiProxy": "https://countdown.proxy:9002",
+  "defaultStopCode": 91431,
+  "defaultStops": [
+    { "code": 91431, "label": "HereEast (towards Stratford)" },
+    { "code": 91432, "label": "HereEast (towards London)"},
+    { "code": 91426, "label": "Abingdon Road (towards Aldwych)"}
+  ]
 }

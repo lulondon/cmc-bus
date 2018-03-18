@@ -1,15 +1,9 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 
-import { countdownApiProxy } from '../../../config/config.json'
+import { countdownApiProxy, defaultStopCode, defaultStops } from '../../../config/config.json'
 
 import Bus from '../ui/Bus'
-
-const defaultStops = [
-  <option value={null} key={0}>&nbsp;</option>,
-  <option value={91431} key={91431}>HereEast (towards Stratford)</option>,
-  <option value={91432} key={91432}>HereEast (towards London)</option>
-]
 
 class ContainerBus extends Component {
   constructor() {
@@ -20,7 +14,7 @@ class ContainerBus extends Component {
       error: false,
       errors: [],
       loading: true,
-      stopCode: 91431,
+      stopCode: defaultStopCode,
       textFieldError: null
     }
 
@@ -60,7 +54,7 @@ class ContainerBus extends Component {
     if (validationPattern.test(event.target.value)) {
       this.setState({
         errors: [],
-        stopCode: event.target.value,
+        stopCode: event.target.value || defaultStopCode,
         textFieldError: null
       }, () => this.loadData())
     } else {
@@ -118,7 +112,8 @@ class ContainerBus extends Component {
     return (
       <Bus
         data={this.state.data}
-        defaultStops={defaultStops}
+        defaultStops={defaultStops.map(stop =>
+          <option value={stop.code} key={stop.code}>{stop.label}</option>)}
         errors={this.state.errors}
         handleAddError={this.handleAddError}
         handleClearErrors={this.handleClearErrors}

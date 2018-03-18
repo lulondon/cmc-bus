@@ -1,7 +1,7 @@
 {
   "name": "cmc-bus",
-  "version": "1.0.0",
-  "description": "Bus info screen (demo)",
+  "version": "2.1.0",
+  "description": "Bus info screen",
   "main": "index.js",
   "scripts": {
     "build": "NODE_ENV=production ./node_modules/.bin/webpack --config config/webpack.prod.config.js",
