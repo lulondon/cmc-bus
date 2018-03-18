@@ -3,6 +3,8 @@ import axios from 'axios'
 import _ from 'lodash'
 import NextBusInfo from './NextBusInfo'
 
+import { countdownApiProxy } from '../../config/config.json'
+
 export default class NextBus extends Component {
   constructor(props) {
     super(props)
@@ -17,22 +19,22 @@ export default class NextBus extends Component {
   }
 
   loadData() {
-    axios.get('http://countdown.api.tfl.gov.uk/interfaces/ura/instant_V1', {
-      params: {
-        StopCode1: this.state.stopCode,
+    let component = this // eslint-disable-line prefer-const
+
+    const { stopCode } = this.state
+
+    axios.post(`${countdownApiProxy}/${stopCode}`, {
+      options: {
         ReturnList: 'EstimatedTime,LineID,DestinationName,StopPointName'
       }
     })
-      .then((response) => {
-        this.props.handleClearErrors()
-
-        this.setState({
-          busData: JSON.parse(`[${response.data.replace(/]/g, '],').replace(/\],$/, ']').toString()}]`),
+      .then(response =>
+        component.setState({
+          busData: response.data,
           loading: false
-        })
-      })
-      .catch((err) => {
-        this.props.handleAddError(err)
+        }))
+      .catch(() => {
+        this.setState({ error: true, loading: true })
       })
   }
 
