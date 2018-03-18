@@ -2,10 +2,19 @@
 *cmc-bus* is a single-page application for requesting and displaying live bus stop departure information for London buses. It is designed specifically for Loughborough University London, and has some hardcoded elements that reflect this.
 
 ## Configuration
-### *config/config.json* 
+
+All configuration is done with the *config/config.json* configuration file. An example is provided below, as well as in the *config/* directory.
+
+### example *config/config.json* 
 ```JSON
 {
-  "countdownApiProxy": "https://locationof.tfl-countdown-web-proxy:9002"
+  "countdownApiProxy": "https://locationof.tfl-countdown-web-proxy:9002",
+  "defaultStopCode": 91431,
+  "defaultStops": [
+    { "code": 91431, "label": "HereEast (towards Stratford)" },
+    { "code": 91432, "label": "HereEast (towards London)"},
+    { "code": 91426, "label": "Abingdon Road (towards Aldwych)"}
+  ]
 }
 ```
 
