@@ -5,13 +5,13 @@
 ### *config/config.json* 
 ```JSON
 {
-  "countdownApiProxy": "https://locationof.[tfl-countdown-web-proxy](https://github.com/jonlinnell/tfl-countdown-web-proxy):9002"
+  "countdownApiProxy": "https://locationof.tfl-countdown-web-proxy:9002"
 }
 ```
 
 ## Usage
 ### Build
-Other than the previously mentioned API proxy (for HTTPS and CORS support,) *cmc-bus* does not require any API keys or further modification to function.
+Other than the previously mentioned dependence on [tfl-countdown-web-proxy](https://github.com/jonlinnell/tfl-countdown-web-proxy) for HTTPS and CORS support, *cmc-bus* does not require any API keys or further modification to function.
 
 First install dependencies:
 ```shell
