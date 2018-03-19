@@ -93,8 +93,11 @@ class ContainerBus extends Component {
       }
     })
       .then((response) => {
+        const { data } = response
+        data.shift() // Remove the versioning/meta element
+
         component.setState({
-          data: response.data.splice(-1).sort((a, b) => {
+          data: data.sort((a, b) => {
             const x = a[5]
             const y = b[5]
             return ((x < y) ? -1 : ((x > y) ? 1 : 0)) // eslint-disable-line no-nested-ternary
@@ -112,8 +115,8 @@ class ContainerBus extends Component {
     return (
       <Bus
         data={this.state.data}
-        defaultStops={defaultStops.map(stop =>
-          <option value={stop.code} key={stop.code}>{stop.label}</option>)}
+        defaultStops={defaultStops}
+        defaultStopCode={defaultStopCode}
         errors={this.state.errors}
         handleAddError={this.handleAddError}
         handleClearErrors={this.handleClearErrors}
