@@ -5,6 +5,7 @@ class Bus extends Component {
     const {
       data,
       defaultStops,
+      defaultStopCode,
       errors,
       handleCodeEntry,
       handleSelectStop,
@@ -28,13 +29,14 @@ class Bus extends Component {
                     <div className='form-row'>
                       <div className='form-group col-lg col-xs-12'>
                         <label htmlFor='nearbyStops'>Bus stops near campus</label>
-                        <select className='form-control' id='nearbyStops' defaultValue={91431} onChange={handleSelectStop}>
-                          {defaultStops}
+                        <select className='form-control' id='nearbyStops' defaultValue={defaultStopCode} onChange={handleSelectStop}>
+                          {defaultStops.map(stop =>
+                            <option value={stop.code} key={stop.code}>{stop.label}</option>)}
                         </select>
                       </div>
                       <div className='form-group col-lg col-xs-12'>
                         <label htmlFor='stopCode'>5-digit bus stop code</label>
-                        <input className='form-control' type='text' id='stopCode' placeholder={`ex. ${stopCode || 91432}`} onChange={handleCodeEntry}></input>
+                        <input className='form-control' type='text' id='stopCode' placeholder={`ex. ${stopCode || defaultStopCode}`} onChange={handleCodeEntry}></input>
                       </div>
                     </div>
                   </form>
