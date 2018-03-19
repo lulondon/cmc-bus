@@ -1,15 +1,15 @@
 import React, { Component } from 'react'
 
-class Bus extends Component {
+import LiveBusDepartures from '../containers/LiveBusDepartures'
+
+class Page extends Component {
   render() {
     const {
-      data,
       defaultStops,
       defaultStopCode,
       errors,
       handleCodeEntry,
       handleSelectStop,
-      loading,
       stopCode,
       textFieldError
     } = this.props
@@ -62,10 +62,7 @@ class Bus extends Component {
               : <div className='col-xs-12 col-lg-6 offset-lg-3'>
                   {
                     stopCode
-                      ? <LiveBusDepartures
-                          data={data}
-                          loading={loading}
-                        />
+                      ? <LiveBusDepartures stopCode={stopCode} />
                       : null
                   }
                 </div>
@@ -76,51 +73,4 @@ class Bus extends Component {
   }
 }
 
-class LiveBusDepartures extends Component {
-  render() {
-    const { data, loading } = this.props
-
-    return (
-      <div className='list-group'>
-        <div className='list-group-item m-0 p-4 pb-0 bus-info-header'>
-          <h3>{data[0] ? data[0][1] : 'Live Bus Departures'}</h3>
-          <p className='bus-header-subtitle mb-0'>Next buses to depart from this stop.</p>
-        </div>
-          {
-            loading
-                ? <div className='p-0 list-group-item loader' />
-                : <div className='p-0 list-group-item loader-padding' />
-          }
-          {data.map(bus => <BusInfo bus={bus} key={bus[4]} />)}
-        <div className='list-group-item bus-attribution-footer px-4'>Powered by TfL Open Data</div>
-      </div>
-    )
-  }
-}
-
-class BusInfo extends Component {
-  render() {
-    const routeInfoClasses = ['pl-2', 'py-2', 'm-0', 'lead', 'bus-info-col']
-    const { bus } = this.props
-
-    if (bus[0] === 4) {
-      return null
-    } else {
-      return (
-        <div className='list-group-item d-flex'>
-          <p className={routeInfoClasses.concat(['text-secondary']).join(' ')}>{bus[2]}</p>
-          <p className={routeInfoClasses.join(' ')}>{bus[3]}</p>
-          <p className='p-2 m-0 ml-auto bus-info-col'>
-            {
-              Math.round(((
-                Math.abs(new Date(bus[4] - Date.now())) % 86400000) % 3600000) / 60000)
-            }
-            &nbsp;mins
-          </p>
-        </div>
-      )
-    }
-  }
-}
-
-export default Bus
+export default Page

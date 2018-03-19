@@ -5,6 +5,6 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 
 import './main.css'
 
-import Bus from './components/containers/Bus'
+import Page from './components/containers/Page'
 
-render(<Bus />, document.getElementById('root'))
+render(<Page />, document.getElementById('root'))

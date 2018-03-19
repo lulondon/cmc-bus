@@ -1,19 +1,16 @@
 import React, { Component } from 'react'
-import axios from 'axios'
 
-import { countdownApiProxy, defaultStopCode, defaultStops } from '../../../config/config.json'
+import { defaultStopCode, defaultStops } from '../../../config/config.json'
 
-import Bus from '../ui/Bus'
+import Page from '../ui/Page'
 
-class ContainerBus extends Component {
+class ContainerPage extends Component {
   constructor() {
     super()
 
     this.state = {
-      data: [],
       error: false,
       errors: [],
-      loading: true,
       stopCode: defaultStopCode,
       textFieldError: null
     }
@@ -22,19 +19,6 @@ class ContainerBus extends Component {
     this.handleCodeEntry = this.handleCodeEntry.bind(this)
     this.handleAddError = this.handleAddError.bind(this)
     this.handleClearErrors = this.handleClearErrors.bind(this)
-    this.loadData = this.loadData.bind(this)
-  }
-
-  componentDidMount() {
-    this.loadData()
-    const timer = setInterval(() => {
-      this.loadData()
-    }, 10000)
-    this.setState({ timer })
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.state.timer)
   }
 
   handleSelectStop(event) {
@@ -44,7 +28,7 @@ class ContainerBus extends Component {
       textFieldError: null,
       errors: [],
       stopCode: event.target.value
-    }, () => this.loadData())
+    })
   }
 
   handleCodeEntry(event) {
@@ -56,7 +40,7 @@ class ContainerBus extends Component {
         errors: [],
         stopCode: event.target.value || defaultStopCode,
         textFieldError: null
-      }, () => this.loadData())
+      })
     } else {
       this.setState({
         textFieldError: 'Invalid code'
@@ -80,41 +64,9 @@ class ContainerBus extends Component {
     this.setState({ errors: [] })
   }
 
-  loadData() {
-    let component = this // eslint-disable-line prefer-const
-
-    const { stopCode } = this.state
-
-    this.setState({ loading: true })
-
-    axios.post(`${countdownApiProxy}/${stopCode}`, {
-      options: {
-        ReturnList: 'EstimatedTime,LineID,DestinationName,StopPointName'
-      }
-    })
-      .then((response) => {
-        const { data } = response
-        data.shift() // Remove the versioning/meta element
-
-        component.setState({
-          data: data.sort((a, b) => {
-            const x = a[5]
-            const y = b[5]
-            return ((x < y) ? -1 : ((x > y) ? 1 : 0)) // eslint-disable-line no-nested-ternary
-          }),
-          loading: false
-        })
-      })
-      .catch((err) => {
-        this.handleAddError(err)
-        this.setState({ error: true, loading: false })
-      })
-  }
-
   render() {
     return (
-      <Bus
-        data={this.state.data}
+      <Page
         defaultStops={defaultStops}
         defaultStopCode={defaultStopCode}
         errors={this.state.errors}
@@ -122,7 +74,6 @@ class ContainerBus extends Component {
         handleClearErrors={this.handleClearErrors}
         handleCodeEntry={this.handleCodeEntry}
         handleSelectStop={this.handleSelectStop}
-        loading={this.state.loading}
         stopCode={this.state.stopCode}
         textFieldError={this.state.textFieldError}
       />
@@ -130,4 +81,4 @@ class ContainerBus extends Component {
   }
 }
 
-export default ContainerBus
+export default ContainerPage
