@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 
-import { countdownApiProxy } from '../../../config/config.json'
+import { countdownApiProxy, refreshInterval } from '../../../config/config.json'
 
 import LiveBusDepartures from '../ui/LiveBusDepartures'
 
@@ -22,7 +22,7 @@ class ContainerLiveBusDepartures extends Component {
     this.loadData()
     const timer = setInterval(() => {
       this.loadData()
-    }, 10000)
+    }, refreshInterval || 30000)
     this.setState({ timer })
   }
 
