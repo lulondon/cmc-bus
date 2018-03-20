@@ -20,7 +20,7 @@ All configuration is done with the *config/config.json* configuration file. An e
 ```
 
 ##### countdownApiProxy
-*cmc-bus* is designed to load data from the TfL Countdown Instant API via an instance of the [tfl-countdown-web-proxy](https://github.com/jonlinnell/tfl-countdown-proxy-api) API proxy. This is required for HTTPS and response sanitising.
+*cmc-bus* is designed to load data from the TfL Countdown Instant API via an instance of [tfl-countdown-web-proxy](https://github.com/jonlinnell/tfl-countdown-web-proxy). This is required for HTTPS and response sanitising.
 
 ##### defaultStopCode
 The first stop code to load on a new instance.
