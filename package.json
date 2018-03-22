@@ -21,16 +21,13 @@
   },
   "homepage": "https://github.com/lulondon/cmc-bus#readme",
   "devDependencies": {
-    "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-eslint": "^7.2.3",
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.1",
-    "babel-preset-node": "^5.1.1",
     "babel-preset-react": "^6.24.1",
     "clean-webpack-plugin": "^0.1.17",
     "css-loader": "^0.28.8",
-    "dotenv-webpack": "^1.5.4",
     "eslint": "^4.15.0",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-config-react-app": "^2.1.0",
@@ -42,8 +39,6 @@
     "file-loader": "^1.1.6",
     "html-webpack-plugin": "^2.30.1",
     "husky": "^0.14.3",
-    "purify-css": "^1.2.5",
-    "purifycss-webpack": "^0.7.0",
     "style-loader": "^0.19.1",
     "uglifyjs-webpack-plugin": "^1.1.6",
     "webpack": "^3.10.0",
@@ -53,11 +48,8 @@
   "dependencies": {
     "axios": "^0.17.1",
     "bootstrap": "^4.0.0-beta.3",
-    "lodash": "^4.17.5",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "react-tap-event-plugin": "^3.0.2",
-    "typeface-roboto": "^0.0.48",
     "url-loader": "^0.6.2"
   }
 }

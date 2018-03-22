@@ -1,6 +1,5 @@
 const htmlWebpackPlugin = require('html-webpack-plugin')
 const extractTextPlugin = require('extract-text-webpack-plugin')
-const dotenvWebpack = require('dotenv-webpack')
 
 const paths = require('./paths')
 
@@ -14,10 +13,7 @@ module.exports = {
     new htmlWebpackPlugin({
       template: paths.src + '/index.html'
     }),
-    new extractTextPlugin('bundle.css'),
-    new dotenvWebpack({
-      path: paths.app + '/.env'
-    }),
+    new extractTextPlugin('bundle.css')
   ],
   module: {
     loaders: [
