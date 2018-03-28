@@ -32,8 +32,9 @@ html {
   vertical-align: middle;
 }
 
-.bus-attribution-footer {
+.attribution {
   font-size: 0.8rem;
+  color: #333;
 }
 
 .jumbotron {

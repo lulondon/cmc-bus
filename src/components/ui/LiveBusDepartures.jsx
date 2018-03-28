@@ -18,7 +18,7 @@ class LiveBusDepartures extends Component {
                 : <div className='p-0 loader-padding' />
           }
           {data.map(bus => <BusInfo bus={bus} key={bus[4]} />)}
-        <div className='list-group-item bus-attribution-footer px-4'>Powered by TfL Open Data</div>
+        <div className='list-group-item attribution'>Powered by TfL Open Data</div>
       </div>
     )
   }
